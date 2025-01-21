@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <button id="fullscreenBtn">FULL SCREEN</button>
+
+    <div id="gameholder">
+      <div id="gameAreaModal">
+        <button id="closeGameAreaBtn">❌</button>
+      </div>
+      <div id="sleepHolder">
+        <button id="lightON">💡</button>
+        <div class="lightsOffCurtain">💤</div>
+      </div>
+      <div id="actions">
+        <div style="font-weight: bolder; font-size: 2em">Actions</div>
+        <button id="feedBtn">feed</button>
+        <button id="playBtn">play</button>
+        <button id="sleepBtn">sleep</button>
+      </div>
+      <div id="playerStats">
+        <div>
+          <div>
+            <div>Happiness</div>
+            <div id="happinessStatsHolder" class="valuesHolder"></div>
+          </div>
+          <div>
+            <div>Bored</div>
+            <div id="boredStatsHolder" class="valuesHolder"></div>
+          </div>
+          <div>
+            <div>Sleep</div>
+            <div id="sleepStatsHolder" class="valuesHolder"></div>
+          </div>
+          <div>
+            <div>Hunger</div>
+            <div id="hungerStatsHolder" class="valuesHolder"></div>
+          </div>
+        </div>
+      </div>
+      <div id="petHolder">
+        <p id="petIcon" style="font-size: 180px; text-align: center">🐨</p>
+        <p id="petName" style="font-size: 20px; text-align: center">PET NAME</p>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

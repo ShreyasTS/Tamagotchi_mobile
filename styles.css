@@ -1,0 +1,165 @@
+body {
+  margin: 0;
+  padding-bottom: 3rem;
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin: 0;
+  -webkit-overflow-scrolling: touch;
+  height: 100vh;
+}
+
+* {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  font-family: Arial, Helvetica, sans-serif;
+  user-select: none;
+  transition: all 0.3s;
+}
+
+/* html {
+    overflow: hidden;
+  } */
+
+.lightsOffCurtain,
+#sleepHolder {
+  display: none;
+  z-index: 20;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  font-size: 80px;
+  justify-content: center;
+  align-items: center;
+}
+
+#lightON {
+  position: fixed;
+  z-index: 25;
+  top: 20px;
+  right: 20px;
+  background-color: transparent;
+  font-size: 40px;
+  transform: rotate(180deg);
+}
+
+#playerStats {
+  border: 2px solid black;
+  border-radius: 10px;
+  width: 80%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 20px;
+}
+
+#playerStats * {
+  /* font-size: large; */
+  font-weight: bold;
+}
+
+.statsValues {
+  border: 2px solid rgb(159, 159, 159);
+  font-size: 20px;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.valuesHolder {
+  display: flex;
+  gap: 5px;
+}
+
+#actions {
+  margin: 20px;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 20px;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#actions button {
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 10px;
+  width: 50%;
+  box-shadow: 0px 5px black;
+  font-size: large;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+#actions button:active {
+  background-color: teal;
+  box-shadow: 0px 0px;
+  transform: translate(0px, 5px);
+}
+
+#gameAreaModal {
+  border: 5px solid black;
+  width: 90%;
+  height: 90%;
+  position: fixed;
+  z-index: 5;
+  background-color: lightgrey;
+  display: none;
+}
+
+#closeGameAreaBtn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: fit-content;
+  height: fit-content;
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: transparent;
+}
+
+#gameholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-image: linear-gradient(lightpink, lightblue);
+}
+
+#petHolder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 2px solid black;
+  margin: 10px;
+  border-radius: 10px;
+  width: 80%;
+}
+
+#fullscreenBtn {
+  z-index: 999;
+  position: fixed;
+  top: 5px;
+  right: 5px;
+  width: fit-content;
+}
