@@ -8,9 +8,9 @@ let playerStats = {
   isSleeping: false,
   isPlaying: false,
   isEating: false,
-  lastSlept: "",
-  lastAte: "",
-  lastPlayed: "",
+  lastSlept: 0,
+  lastAte: 0,
+  lastPlayed: 0,
   currentState: "",
 };
 
@@ -53,14 +53,14 @@ document.addEventListener("DOMContentLoaded", () => {
       petEmoji: "🐶",
       happiness: 5,
       bored: 5,
-      sleep: 5,
+      sleep: 3,
       hunger: 5,
       isSleeping: false,
       isPlaying: false,
       isEating: false,
-      lastSlept: "",
-      lastAte: "",
-      lastPlayed: "",
+      lastSlept: 0,
+      lastAte: 0,
+      lastPlayed: 0,
       currentState: "",
     };
   }
@@ -73,6 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (playerStats.isSleeping || playerStats.currentState == "sleep") {
     setSleepState();
   }
+  checkStatsAndUpdate();
 });
 
 function updateStatView(element, template, count) {
@@ -124,16 +125,18 @@ lightON.addEventListener("mouseup", (e) => {
     playerStats.currentState = "idle";
     playerStats.isSleeping = false;
     sleepEndTimer = Date.now();
-    let sleepTime = Math.round((sleepEndTimer - sleepStartTimer) / 1000);
+    playerStats.lastSlept = sleepEndTimer;
+    let sleepTime = parseInt((sleepEndTimer - sleepStartTimer) / 1000);
     console.log("SLEPT FOR: ", sleepTime);
     playerStats.currentState = "idle";
     saveGameStats();
     if (sleepTime > 60) {
-      let sleepRating = Math.round(sleepTime / 60 / 2);
-      if (playerStats.sleep > 0 && playerStats.sleep - sleepRating <= 5) {
-        playerStats.sleep = 5 - sleepRating;
+      let sleepRating = parseInt(sleepTime / 60);
+      console.log("WOKE UP RATING: ", sleepRating);
+      if (playerStats.sleep > 0 && playerStats.sleep - sleepRating > 0) {
+        playerStats.sleep -= sleepRating;
         saveGameStats();
-        updateStatView(sleepStatsHolder, sleepStatTemplate, sleepRating);
+        updateStatView(sleepStatsHolder, sleepStatTemplate, playerStats.sleep);
       } else console.log(sleepRating);
     }
   }
@@ -168,8 +171,24 @@ function petSlept() {
   playerStats.lastSlept = lastSlept;
 }
 
-statsChecker = setInterval(checkStatsAndUpdate, 1000);
+statsChecker = setInterval(checkStatsAndUpdate, 60000);
 
+// playerStats.sleep = 0;
+// saveGameStats();
+let prevSleepRating = 0;
 function checkStatsAndUpdate() {
-  console.log();
+  if (!playerStats.isSleeping && playerStats.sleep < 5) {
+    let awakeTime = parseInt((Date.now() - playerStats.lastSlept) / 1000);
+    console.log("AT: ", awakeTime);
+    let sleepRating = parseInt(awakeTime / 60);
+    console.log("SR: ", sleepRating);
+    if (sleepRating <= 5) {
+      playerStats.sleep = sleepRating;
+      if (sleepRating != prevSleepRating) {
+        prevSleepRating = sleepRating;
+        saveGameStats();
+        updateStatView(sleepStatsHolder, sleepStatTemplate, playerStats.sleep);
+      }
+    }
+  }
 }

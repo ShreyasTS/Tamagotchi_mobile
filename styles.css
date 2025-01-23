@@ -39,6 +39,7 @@ body {
   font-size: 80px;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 #lightON {
@@ -156,10 +157,17 @@ body {
   width: 80%;
 }
 
-#fullscreenBtn {
+#fullscreenBtn,
+#saveBtn {
   z-index: 999;
   position: fixed;
   top: 5px;
   right: 5px;
   width: fit-content;
+  border: 1px solid black;
+}
+
+#saveBtn {
+  top: 5px;
+  left: 5px;
 }
