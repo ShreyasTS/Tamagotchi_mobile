@@ -28,10 +28,6 @@ let lightON = document.getElementById("lightON");
 let gameAreaModal = document.getElementById("gameAreaModal");
 let petName = document.getElementById("petName");
 let petIcon = document.getElementById("petIcon");
-let canvasHolder = document.getElementById("gameAreaModal");
-
-const canvas = document.getElementById("gameAreaCanvas");
-const ctx = canvas.getContext("2d");
 
 //Stats Divs
 let happinessStatsHolder = document.getElementById("happinessStatsHolder");
@@ -49,20 +45,12 @@ let sleepStatTemplate = `<div class="statsValues">💤</div>`;
 let hungerStatTemplate = `<div class="statsValues">🥄</div>`;
 let emptyStateTemplate = `<div class="statsValues">-</div>`;
 
-const generateRandomID = (length) =>
-  Array.from(
-    { length },
-    () => "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"[Math.floor(Math.random() * 62)]
-  ).join("");
-
 document.addEventListener("DOMContentLoaded", () => {
-  ctx.color = "black";
-  ctx.fillRect(10, 10, 50, 50);
   playerStats = JSON.parse(window.localStorage.getItem("gameState"));
   if (playerStats == null) {
     playerStats = {
       petName: "mousie",
-      petEmoji: "🐹",
+      petEmoji: "🐶",
       happiness: 5,
       bored: 5,
       sleep: 3,
@@ -103,9 +91,7 @@ feedBtn.addEventListener("mouseup", (e) => {
   console.log("FEED");
   loadFeedContent();
   fedPet();
-  // canvas.width = canvasHolder.style.width;
-  // canvas.height = canvasHolder.style.height;
-  gameAreaModal.style.display = "block";
+  gameAreaModal.style.display = "flex";
 });
 playBtn.addEventListener("mouseup", (e) => {
   console.log("play");
@@ -170,25 +156,7 @@ function setSleepState() {
   playerStats.currentState = "sleep";
 }
 
-function loadFeedContent() {
-  // gameAreaModal.innerHTML = "";
-  for (let index = 0; index < 5; index++) {
-    let food1 = document.createElement("button");
-    food1.id = generateRandomID(4);
-    food1.addEventListener("click", () => {
-      console.log("ate", food1.id);
-      gameAreaModal.removeChild(food1);
-      setTimeout(() => {
-        gameAreaModal.style.display = "none";
-        gameAreaModal.classList.add("closeInteractiveArea");
-      }, 1000);
-    });
-    food1.classList.add("foodGameItem");
-    food1.style.top = `${Math.floor(Math.random() * (360 - 0 + 1)) + 0}px`;
-    food1.style.right = `${Math.floor(Math.random() * (360 - 0 + 1)) + 0}px`;
-    gameAreaModal.appendChild(food1);
-  }
-}
+function loadFeedContent() {}
 
 function loadGameContent() {}
 
@@ -207,10 +175,7 @@ statsChecker = setInterval(checkStatsAndUpdate, 60000);
 
 // playerStats.sleep = 0;
 // saveGameStats();
-
 let prevSleepRating = 0;
-let lastKnowSleepValue = 0;
-let lastSleepCounter = 0;
 function checkStatsAndUpdate() {
   if (!playerStats.isSleeping && playerStats.sleep < 5) {
     let awakeTime = parseInt((Date.now() - playerStats.lastSlept) / 1000);
@@ -226,13 +191,4 @@ function checkStatsAndUpdate() {
       }
     }
   }
-
-  // if (lastKnowSleepValue == playerStats.sleep) {
-  // } else {
-  //   lastSleepCounter += 1;
-  //   if (lastSleepCounter > 3) {
-  //     playerStats.happiness -= 1;
-  //   }
-  //   lastKnowSleepValue = playerStats.sleep;
-  // }
 }
